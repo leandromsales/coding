@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+class Solution {
+
+  public List<Integer> findTargetIndexes(List<Integer> nums, int target) {
+    List<Integer> result = new ArrayList<Integer>();
+
+    /*
+     * Define a variable to store the sum of two numbers
+     * Interate in the array
+     *   - For each position get the number and the sum it with the next number
+     *
+     * [2,7,11,15]
+     *
+     *   i = 1
+     *   j = i + 1 = 2
+     *
+     */
+
+    HashMap<Integer, Integer> backtrack = new HashMap<>();
+
+    for (int i = 0; i < nums.size(); i++) {
+      if (backtrack.containsKey(target - nums.get(i))) {
+        return Arrays.asList(backtrack.get(target - nums.get(i)), i);
+      }
+      backtrack.put(nums.get(i), i);
+    }
+    return result;
+
+  }
+
+  public static void main(String[] args) {
+    List<Integer> testArray = new ArrayList<Integer>();
+
+    //  [1,2,3,4,5,6]
+    testArray.add(2);
+    testArray.add(2);
+    testArray.add(3);
+    testArray.add(4);
+    testArray.add(5);
+    testArray.add(6);
+    int target = 5;
+
+    Solution s = new Solution();
+    System.out.println(s.findTargetIndexes(testArray, target));
+
+
+  }
+
+}
